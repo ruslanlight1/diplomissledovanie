@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Результат анализа — {{ nickname }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<div class="max-w-4xl mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold text-center mb-2">📊 Результат анализа</h1>
+    <h2 class="text-lg text-center text-gray-600 mb-6">Пользователь: <strong>{{ nickname }}</strong></h2>
+
+    <!-- Общий вывод и показатели -->
+    <div class="bg-white rounded-lg shadow p-6 mb-6 text-center">
+        <p class="text-xl font-semibold mb-4">📝 <span class="text-blue-600">Общий вывод:</span> {{ overall }}</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-lg">
+            <div>🧠 <strong>Суицидальность:</strong> <span class="text-red-600">{{ levels.suicidal }}%</span></div>
+            <div>😟 <strong>Тревожность:</strong> <span class="text-yellow-600">{{ levels.anxiety }}%</span></div>
+            <div>😞 <strong>Депрессия:</strong> <span class="text-purple-600">{{ levels.depression }}%</span></div>
+        </div>
+    </div>
+
+    <!-- Рисунок -->
+    <div class="bg-white rounded-lg shadow p-6 mb-6">
+        <h3 class="text-xl font-semibold mb-4">🖼️ Рисунок пользователя</h3>
+        <img src="{{ url_for('static', filename='user_results/' + user_image) }}" alt="Рисунок" class="rounded mx-auto max-w-full">
+    </div>
+
+    <!-- Интерпретация -->
+    <div class="bg-white rounded-lg shadow p-6 mb-6">
+        <h3 class="text-xl font-semibold mb-4">🔑 Интерпретация</h3>
+        <div class="space-y-3">
+            {% for key in keys %}
+                <p class="text-gray-800 leading-relaxed">• {{ key }}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Признаки -->
+    <div class="bg-white rounded-lg shadow p-6">
+        <h3 class="text-xl font-semibold mb-4">📐 Выделенные признаки</h3>
+        <table class="w-full text-sm text-left border border-gray-300">
+            <tbody>
+                <tr class="border-t">
+                    <td class="p-2 font-medium">Процент закрашенной границы</td>
+                    <td class="p-2">{{ features.outline_ratio }}%</td>
+                </tr>
+                <tr class="border-t">
+                    <td class="p-2 font-medium">Закрашено внутри фигуры</td>
+                    <td class="p-2">{{ (features.total_fill_ratio * 100) | round(1) }}%</td>
+                </tr>
+                <tr class="border-t">
+                    <td class="p-2 font-medium">Закрашено вне фигуры</td>
+                    <td class="p-2">{{ (features.outside_ratio * 100) | round(1) }}%</td>
+                </tr>
+                <tr class="border-t">
+                    <td class="p-2 font-medium">Обводка</td>
+                    <td class="p-2">{{ '✅ Есть' if features.outline_detected else '❌ Нет' }}</td>
+                </tr>
+                <tr class="border-t">
+                    <td class="p-2 font-medium">Левая часть</td>
+                    <td class="p-2">{{ (features.left_ratio * 100) | round(1) }}%</td>
+                </tr>
+                <tr class="border-t">
+                    <td class="p-2 font-medium">Правая часть</td>
+                    <td class="p-2">{{ (features.right_ratio * 100) | round(1) }}%</td>
+                </tr>
+                <tr class="border-t">
+                    <td class="p-2 font-medium">Центральная часть</td>
+                    <td class="p-2">{{ (features.fill_center * 100) | round(1) }}%</td>
+                </tr>
+                <tr class="border-t">
+                    <td class="p-2 font-medium">Кол-во фрагментов</td>
+                    <td class="p-2">{{ features.num_fragments }}</td>
+                </tr>
+                <tr class="border-t">
+                    <td class="p-2 font-medium">Мелких фрагментов</td>
+                    <td class="p-2">{{ features.small_fragments }}</td>
+                </tr>
+                <tr class="border-t">
+                    <td class="p-2 font-medium">Попавшие фрагменты</td>
+                    <td class="p-2">{{ features.matched_fragment_ids | join(", ") }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

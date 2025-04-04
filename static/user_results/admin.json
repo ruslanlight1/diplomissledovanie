@@ -1,0 +1,27 @@
+{
+  "nickname": "admin",
+  "timestamp": "2025-04-05T02:03:02.223372",
+  "filename": "db4da8aa681d40ecbdf43bbed641ac98.png",
+  "user_image": "admin_composed.png",
+  "features": {
+    "total_fill_ratio": 0.032664218780767494,
+    "left_ratio": 0.04965027615922652,
+    "right_ratio": 0.015949073276109713,
+    "fill_center": 0.010129382738929493,
+    "outline_detected": false,
+    "outline_ratio": 0.0,
+    "num_fragments": 0,
+    "matched_fragment_ids": [],
+    "small_fragments": 0,
+    "outside_ratio": 0.0
+  },
+  "levels": {
+    "suicidal": 5.0,
+    "anxiety": 36.4,
+    "depression": 3.0
+  },
+  "overall": "🟢 Эмоциональный баланс в норме.",
+  "keys": [
+    "🟠 Интерпретация неоднозначна. Возможно, вы закрашивали случайно."
+  ]
+}
