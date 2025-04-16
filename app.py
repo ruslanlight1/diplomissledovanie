@@ -250,12 +250,12 @@ def upload():
         nickname=nickname,
         timestamp=user_data["timestamp"],
         image=user_data["user_image"],
-        suicidal=user_data["levels"]["suicidal"],
-        anxiety=user_data["levels"]["anxiety"],
-        depression=user_data["levels"]["depression"],
+        suicidal=float(user_data["levels"]["suicidal"]),
+        anxiety=float(user_data["levels"]["anxiety"]),
+        depression=float(user_data["levels"]["depression"]),
         keys="\n".join(user_data["keys"])
     )
-    
+
     try:
         db.session.add(entry)
         db.session.commit()
