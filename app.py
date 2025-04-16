@@ -19,7 +19,7 @@ import sys
 app = Flask(__name__)
 app.config.from_object(Config)
 db.init_app(app)
-
+ 
 MASK_PATH = "static/mask.png"
 FILL_PATH = "static/fill.png"
 BORDER_PATH = "static/border.png"
