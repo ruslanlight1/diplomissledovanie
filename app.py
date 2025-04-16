@@ -255,8 +255,14 @@ def upload():
         depression=user_data["levels"]["depression"],
         keys="\n".join(user_data["keys"])
     )
-    db.session.add(entry)
-    db.session.commit()
+    
+    try:
+        db.session.add(entry)
+        db.session.commit()
+        print("✅ Сохранено в PostgreSQL:", entry.nickname)
+    except Exception as e:
+        print("❌ Ошибка при сохранении:", e)
+
 
     return jsonify({
         "result": result["summary"],
