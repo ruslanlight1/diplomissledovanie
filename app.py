@@ -576,6 +576,12 @@ def test_db():
     results = Result.query.all()
     return f"В базе сейчас {len(results)} записей"
 
+@app.route("/init_db")
+def init_db():
+    with app.app_context():
+        db.create_all()
+    return "✅ База данных и таблицы успешно созданы!"
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
